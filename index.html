@@ -133,6 +133,9 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 4rem; color: var(--color-accent);
         }
+        .hero-avatar img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+        }
         .hero-name { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
         .hero-title { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 400; color: var(--color-accent); margin-bottom: 1.5rem; font-family: var(--font-body); }
         .hero-quote { font-style: italic; font-size: 1.1rem; opacity: 0.85; max-width: 500px; margin: 0 auto 0.5rem; font-weight: 300; font-family: var(--font-heading); }
@@ -354,7 +357,7 @@
 
     <header class="hero" id="home">
         <div class="hero-content">
-            <div class="hero-avatar"><i class="fas fa-user"></i></div>
+            <div class="hero-avatar"><img src="profile.jpg" alt="Mohammed Gedidou"></div>
             <h1 class="hero-name">Mohammed Gedidou</h1>
             <p class="hero-title" data-i18n="hero.title">Werkstudent Software Engineering | B.Eng. TI | Masterstudent CE</p>
             <p class="hero-quote" data-i18n="hero.quote">„Man muss das Unmögliche versuchen, um das Mögliche zu erreichen."</p>
