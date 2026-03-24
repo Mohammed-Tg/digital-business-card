@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Gedidou - Working Student Software Engineering</title>
+    <meta name="description" content="Professional digital business card of Mohammed Gedidou - Working Student Software Engineering, B.Eng. TI, Master's Student CE">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-primary: #1a365d;
+            --color-primary-light: #2c5282;
+            --color-primary-dark: #0f2744;
+            --color-accent: #d4af37;
+            --color-accent-light: #e8c547;
+            --color-accent-dark: #b8960c;
+            --bg-primary: #fafafa;
+            --bg-secondary: #f0f0f0;
+            --bg-card: #ffffff;
+            --bg-hero: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #1a365d 100%);
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --text-light: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+            --shadow-gold: 0 4px 15px rgba(212,175,55,0.3);
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --section-padding: 6rem;
+            --container-max: 1200px;
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            /* FIX 1: Navbar bg als echte rgba-Werte */
+            --navbar-bg: rgba(250, 250, 250, 0.88);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f1419;
+            --bg-secondary: #1a202c;
+            --bg-card: #2d3748;
+            --bg-hero: linear-gradient(135deg, #0f2744 0%, #1a365d 50%, #0f2744 100%);
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --text-muted: #a0aec0;
+            --border-color: #4a5568;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
+            /* FIX 1: Dark mode navbar */
+            --navbar-bg: rgba(15, 20, 25, 0.88);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color var(--transition-medium), color var(--transition-medium);
+        }
+        h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); font-weight: 600; line-height: 1.2; }
+        a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
+
+        /* ========== NAVBAR (FIX 1) ========== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background-color: var(--navbar-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all var(--transition-medium);
+        }
+        .navbar.scrolled { box-shadow: var(--shadow-md); }
+        .nav-container {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; max-width: var(--container-max); margin: 0 auto;
+        }
+        .nav-logo { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-primary); }
+        [data-theme="dark"] .nav-logo { color: var(--color-accent); }
+        .nav-logo span { color: var(--color-accent); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { font-weight: 500; color: var(--text-secondary); position: relative; padding: 0.5rem 0; }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0; height: 2px; background: var(--color-accent);
+            transition: width var(--transition-medium);
+        }
+        .nav-links a:hover { color: var(--color-primary); }
+        [data-theme="dark"] .nav-links a:hover { color: var(--color-accent); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+        .theme-toggle, .lang-toggle {
+            background: none; border: 2px solid var(--color-accent); color: var(--color-accent);
+            width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all var(--transition-fast); font-weight: 600; font-size: 0.85rem;
+        }
+        .theme-toggle:hover, .lang-toggle:hover { background: var(--color-accent); color: var(--color-primary-dark); }
+        .theme-toggle:hover { transform: rotate(180deg); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text-primary); cursor: pointer; }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh; background: var(--bg-hero);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .hero-content { text-align: center; color: var(--text-light); z-index: 1; padding: 2rem; }
+        .hero-avatar {
+            width: 180px; height: 180px; border-radius: 50%;
+            border: 4px solid var(--color-accent); margin: 0 auto 2rem;
+            box-shadow: var(--shadow-gold); background: var(--bg-card);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 4rem; color: var(--color-accent);
+        }
+        .hero-name { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+        .hero-title { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 400; color: var(--color-accent); margin-bottom: 1.5rem; font-family: var(--font-body); }
+        .hero-quote { font-style: italic; font-size: 1.1rem; opacity: 0.85; max-width: 500px; margin: 0 auto 0.5rem; font-weight: 300; font-family: var(--font-heading); }
+        .hero-quote-author { font-size: 0.9rem; opacity: 0.7; margin-bottom: 2rem; }
+        .hero-cta { display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .btn { padding: 0.875rem 2rem; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all var(--transition-fast); display: inline-flex; align-items: center; gap: 0.5rem; border: none; }
+        .btn-primary { background: var(--color-accent); color: var(--color-primary-dark); }
+        .btn-primary:hover { background: var(--color-accent-light); transform: translateY(-2px); box-shadow: var(--shadow-gold); }
+        .btn-outline { background: transparent; color: var(--text-light); border: 2px solid var(--color-accent); }
+        .btn-outline:hover { background: var(--color-accent); color: var(--color-primary-dark); transform: translateY(-2px); }
+        .scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; }
+        .scroll-indicator i { color: var(--color-accent); font-size: 1.5rem; }
+        @keyframes bounce {
+            0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* ========== SECTIONS ========== */
+        section { padding: var(--section-padding) 0; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-title { font-size: clamp(2rem,4vw,2.5rem); color: var(--text-primary); margin-bottom: 1rem; position: relative; display: inline-block; }
+        .section-title::after { content: ''; position: absolute; bottom: -0.5rem; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--color-accent); border-radius: 2px; }
+        .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 1.5rem auto 0; }
+
+        /* ========== ABOUT ========== */
+        .about { background: var(--bg-secondary); }
+        .about-content { max-width: 800px; margin: 0 auto; text-align: center; }
+        .about-text { font-size: 1.2rem; line-height: 1.8; color: var(--text-secondary); }
+        .about-text p { margin-bottom: 1.5rem; }
+        .about-highlights { display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; flex-wrap: wrap; }
+        .highlight-item { text-align: center; }
+        .highlight-number { font-size: 2.5rem; font-weight: 700; color: var(--color-accent); font-family: var(--font-heading); }
+        .highlight-label { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ========== TIMELINE ========== */
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: linear-gradient(to bottom, var(--color-accent), var(--color-primary)); }
+        .timeline-item { position: relative; margin-bottom: 3rem; width: 50%; padding: 0 3rem; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        .timeline-dot { position: absolute; width: 20px; height: 20px; background: var(--color-accent); border-radius: 50%; top: 0; border: 4px solid var(--bg-primary); box-shadow: var(--shadow-gold); }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -10px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -10px; }
+        .timeline-content { background: var(--bg-card); padding: 1.5rem 2rem; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); transition: all var(--transition-fast); }
+        .timeline-content:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .timeline-date { color: var(--color-accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .timeline-title { font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .timeline-company { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.75rem; }
+        .timeline-description { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+        .timeline-description ul { list-style: none; padding: 0; }
+        .timeline-description li { position: relative; padding-left: 1.2rem; margin-bottom: 0.4rem; }
+        .timeline-description li::before { content: '•'; position: absolute; left: 0; color: var(--color-accent); font-weight: bold; }
+
+        /* ========== EDUCATION ========== */
+        .education { background: var(--bg-secondary); }
+        .education-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        .education-card { background: var(--bg-card); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); transition: all var(--transition-fast); position: relative; overflow: hidden; }
+        .education-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--color-accent); }
+        .education-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .education-icon { font-size: 2rem; color: var(--color-accent); margin-bottom: 1rem; }
+        .education-degree { font-size: 1.2rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .education-school { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .education-year { color: var(--color-accent); font-weight: 600; font-size: 0.9rem; }
+        .education-note { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; font-style: italic; }
+        .education-focus { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color); }
+        .education-focus-title { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .education-focus-list { list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-secondary); }
+        .education-focus-list li { position: relative; padding-left: 1rem; margin-bottom: 0.3rem; }
+        .education-focus-list li::before { content: '→'; position: absolute; left: 0; color: var(--color-accent); font-size: 0.8rem; }
+
+        /* ========== SKILLS ========== */
+        .skills-container { max-width: 900px; margin: 0 auto; }
+        .skills-category { margin-bottom: 3rem; }
+        .skills-category-title { font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        .skills-category-title i { color: var(--color-accent); }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .skill-item { background: var(--bg-card); padding: 1.25rem; border-radius: 10px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); transition: all var(--transition-fast); }
+        .skill-item:hover { transform: translateX(5px); border-color: var(--color-accent); }
+        .skill-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+        .skill-name { font-weight: 600; color: var(--text-primary); }
+        .skill-percentage { color: var(--color-accent); font-weight: 600; font-size: 0.9rem; }
+        .skill-bar { height: 8px; background: var(--bg-secondary); border-radius: 4px; overflow: hidden; }
+        /* FIX 3: Smoother skill bar animation */
+        .skill-progress { height: 100%; background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-light) 100%); border-radius: 4px; transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1); width: 0; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+        .skill-tag { background: var(--bg-card); color: var(--text-secondary); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.9rem; border: 1px solid var(--border-color); transition: all var(--transition-fast); cursor: default; }
+        .skill-tag:hover { background: var(--color-accent); color: var(--color-primary-dark); border-color: var(--color-accent); transform: translateY(-2px); }
+        .languages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .language-item { background: var(--bg-card); padding: 1rem 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .language-name { font-weight: 600; color: var(--text-primary); }
+        .language-level { color: var(--color-accent); font-size: 0.85rem; }
+        .interests-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+        .interest-item { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-card); padding: 0.75rem 1.25rem; border-radius: 50px; border: 1px solid var(--border-color); color: var(--text-secondary); transition: all var(--transition-fast); }
+        .interest-item:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+        /* ========== CONTACT ========== */
+        .contact { background: var(--bg-secondary); }
+        .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1000px; margin: 0 auto; }
+        .contact-info h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary); }
+        .contact-info p { color: var(--text-secondary); margin-bottom: 2rem; }
+        .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+        .contact-link { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: var(--bg-card); border-radius: 10px; border: 1px solid var(--border-color); transition: all var(--transition-fast); }
+        .contact-link:hover { transform: translateX(5px); border-color: var(--color-accent); box-shadow: var(--shadow-md); }
+        .contact-link i { font-size: 1.25rem; color: var(--color-accent); width: 24px; }
+        .contact-link-text { display: flex; flex-direction: column; }
+        .contact-link-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .contact-link-value { font-weight: 600; color: var(--text-primary); }
+        .contact-form { background: var(--bg-card); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary); }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-body); font-size: 1rem; transition: all var(--transition-fast); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(212,175,55,0.2); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-full { width: 100%; justify-content: center; }
+
+        /* ========== FOOTER ========== */
+        .footer { background: var(--color-primary-dark); color: var(--text-light); padding: 2rem 0; text-align: center; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-text { opacity: 0.8; font-size: 0.9rem; }
+        .footer-social { display: flex; gap: 1rem; }
+        .footer-social a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast); }
+        .footer-social a:hover { background: var(--color-accent); color: var(--color-primary-dark); transform: translateY(-3px); }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            :root { --section-padding: 4rem; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-primary); flex-direction: column; padding: 1rem; border-bottom: 1px solid var(--border-color); gap: 0; }
+            .nav-links.active { display: flex; }
+            .nav-links li { width: 100%; }
+            .nav-links a { display: block; padding: 1rem; border-bottom: 1px solid var(--border-color); }
+            .nav-links a::after { display: none; }
+            .mobile-menu-btn { display: block; }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; left: 0 !important; padding-left: 60px; padding-right: 0; text-align: left !important; }
+            .timeline-dot { left: 10px !important; right: auto !important; }
+            .contact-content { grid-template-columns: 1fr; gap: 2rem; }
+            .about-highlights { gap: 2rem; }
+            .hero-cta { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 280px; justify-content: center; }
+            .nav-controls { gap: 0.5rem; }
+            .theme-toggle, .lang-toggle { width: 36px; height: 36px; font-size: 0.75rem; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 1rem; }
+            .nav-container { padding: 1rem; }
+            .hero-avatar { width: 140px; height: 140px; font-size: 3rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .education-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ========== FIX 3: ANIMATIONS - Modern & Minimal ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Staggered Timeline */
+        .timeline-item:nth-child(1).fade-in { transition-delay: 0s; }
+        .timeline-item:nth-child(2).fade-in { transition-delay: 0.12s; }
+        .timeline-item:nth-child(3).fade-in { transition-delay: 0.22s; }
+
+        /* Staggered Education Cards */
+        .education-card:nth-child(1).fade-in { transition-delay: 0s; }
+        .education-card:nth-child(2).fade-in { transition-delay: 0.12s; }
+
+        /* Hero entrance animations */
+        .hero-avatar { animation: heroAvatarIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .hero-name   { animation: heroFadeUp 0.8s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .hero-title  { animation: heroFadeUp 0.8s 0.28s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .hero-quote, .hero-quote-author { animation: heroFadeUp 0.8s 0.38s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .hero-cta    { animation: heroFadeUp 0.8s 0.5s  cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+        @keyframes heroAvatarIn {
+            from { opacity: 0; transform: scale(0.75); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Print Styles */
+        @media print {
+            .navbar,.scroll-indicator,.theme-toggle,.lang-toggle,.mobile-menu-btn,.hero-cta,.contact-form,.footer-social { display: none !important; }
+            .hero { min-height: auto; padding: 2rem 0; }
+            section { padding: 2rem 0; page-break-inside: avoid; }
+            body { background: white !important; color: black !important; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Mohammed <span>Gedidou</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" data-i18n="nav.about">Über mich</a></li>
+                <li><a href="#experience" data-i18n="nav.experience">Erfahrung</a></li>
+                <li><a href="#education" data-i18n="nav.education">Ausbildung</a></li>
+                <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+                <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+                <li>
+                    <div class="nav-controls">
+                        <button class="lang-toggle" id="langToggle" aria-label="Sprache wechseln">EN</button>
+                        <button class="theme-toggle" id="themeToggle" aria-label="Dark/Light Mode wechseln">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menü öffnen">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-avatar"><i class="fas fa-user"></i></div>
+            <h1 class="hero-name">Mohammed Gedidou</h1>
+            <p class="hero-title" data-i18n="hero.title">Werkstudent Software Engineering | B.Eng. TI | Masterstudent CE</p>
+            <p class="hero-quote" data-i18n="hero.quote">„Man muss das Unmögliche versuchen, um das Mögliche zu erreichen."</p>
+            <p class="hero-quote-author" data-i18n="hero.quoteAuthor">— Hermann Hesse</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-envelope"></i>
+                    <span data-i18n="hero.contactBtn">Kontakt aufnehmen</span>
+                </a>
+                <a href="Lebenslauf%20Mohammed%20Gedidou.pdf" class="btn btn-outline" download>
+                    <i class="fas fa-download"></i>
+                    <span data-i18n="hero.downloadBtn">CV herunterladen</span>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+    </header>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title" data-i18n="about.title">Über mich</h2>
+                <p class="section-subtitle" data-i18n="about.subtitle">Lernen Sie mich kennen</p>
+            </div>
+            <div class="about-content fade-in">
+                <div class="about-text">
+                    <p data-i18n="about.p1">Ich bin ein leidenschaftlicher Software Engineer mit Fokus auf Embedded Systems und Datenanalyse. Mit meinem Bachelor in Technischer Informatik und meinem laufenden Masterstudium in Computer Engineering bringe ich sowohl theoretisches Wissen als auch praktische Erfahrung mit.</p>
+                    <p data-i18n="about.p2">Bei 50Hertz Transmission GmbH konnte ich wertvolle Erfahrungen in der Softwareentwicklung, Datenvisualisierung und Systemadministration sammeln. Ich liebe es, komplexe technische Herausforderungen zu meistern und innovative Lösungen zu entwickeln.</p>
+                    <p data-i18n="about.p3">In meiner Freizeit beschäftige ich mich mit DIY-Elektronik, spiele Fußball und setze mich für Nachhaltigkeit in der Technikentwicklung ein.</p>
+                </div>
+                <div class="about-highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-number">5+</div>
+                        <div class="highlight-label" data-i18n="about.highlight1">Jahre Erfahrung</div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-number">1.8</div>
+                        <div class="highlight-label" data-i18n="about.highlight2">Bachelor Note</div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-number">3</div>
+                        <div class="highlight-label" data-i18n="about.highlight3">Sprachen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title" data-i18n="experience.title">Berufserfahrung</h2>
+                <p class="section-subtitle" data-i18n="experience.subtitle">Mein Werdegang</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">08/2024 – <span data-i18n="experience.present">heute</span></div>
+                        <h3 class="timeline-title" data-i18n="experience.job1.title">Werkstudent Software Engineering</h3>
+                        <div class="timeline-company">50Hertz Transmission GmbH, Berlin</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li data-i18n="experience.job1.task1">Entwicklung interner Softwarepakete</li>
+                                <li data-i18n="experience.job1.task2">Unterstützung von Entwicklerteams bei Deployment, Updates und OpenShift-Administration</li>
+                                <li data-i18n="experience.job1.task3">Erstellung von internen Anwendungen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">06/2023 – 07/2024</div>
+                        <h3 class="timeline-title" data-i18n="experience.job2.title">Werkstudent Data Analysis (zuvor Praktikant)</h3>
+                        <div class="timeline-company">50Hertz Transmission GmbH, Berlin</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li data-i18n="experience.job2.task1">Entwicklung von Dashboards zur Visualisierung von Daten</li>
+                                <li data-i18n="experience.job2.task2">Analyse und Aufbereitung energiewirtschaftlicher Systemdaten</li>
+                                <li data-i18n="experience.job2.task3">Mitarbeit an der Optimierung relationaler Datenbankmodelle</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">02/2020 – 05/2023</div>
+                        <h3 class="timeline-title" data-i18n="experience.job3.title">Verkäufer</h3>
+                        <div class="timeline-company">Action Deutschland GmbH, Berlin</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li data-i18n="experience.job3.task1">Kundenberatung, Kassentätigkeit und Warenlogistik</li>
+                                <li data-i18n="experience.job3.task2">Verantwortung für Ordnung und Organisation im Verkaufsraum</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="education" id="education">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title" data-i18n="education.title">Ausbildung</h2>
+                <p class="section-subtitle" data-i18n="education.subtitle">Meine akademische Laufbahn</p>
+            </div>
+            <div class="education-grid">
+                <div class="education-card fade-in">
+                    <div class="education-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="education-degree" data-i18n="education.master.degree">Masterstudium Computer Engineering</h3>
+                    <p class="education-school">HTW Berlin</p>
+                    <span class="education-year">04/2025 – <span data-i18n="education.present">heute</span></span>
+                </div>
+                <div class="education-card fade-in">
+                    <div class="education-icon"><i class="fas fa-certificate"></i></div>
+                    <h3 class="education-degree" data-i18n="education.bachelor.degree">B.Eng. Technische Informatik – Embedded-Systems</h3>
+                    <p class="education-school">Berliner Hochschule für Technik</p>
+                    <span class="education-year">10/2019 – 04/2025</span>
+                    <p class="education-note" data-i18n="education.bachelor.thesis">Bachelorarbeit: „Visuell gesteuerte Roboter" – Note 1,8</p>
+                    <div class="education-focus">
+                        <p class="education-focus-title" data-i18n="education.focus.title">Technische Schwerpunkte</p>
+                        <ul class="education-focus-list">
+                            <li data-i18n="education.focus.1">Advanced Python (Versionen 3.6–3.11)</li>
+                            <li data-i18n="education.focus.2">Software Engineering mit C++</li>
+                            <li data-i18n="education.focus.3">iOS-Programmierung mit Swift UI</li>
+                            <li data-i18n="education.focus.4">Embedded Systems & Systemarchitektur</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title" data-i18n="skills.title">Skills</h2>
+                <p class="section-subtitle" data-i18n="skills.subtitle">Meine Fähigkeiten & Expertise</p>
+            </div>
+            <div class="skills-container">
+                <div class="skills-category fade-in">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-code"></i>
+                        <span data-i18n="skills.technical.title">Programmiersprachen & Tools</span>
+                    </h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-header"><span class="skill-name">Python (3.6-3.13)</span><span class="skill-percentage">90%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-skill="90"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span class="skill-name">C/C++</span><span class="skill-percentage">85%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-skill="85"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span class="skill-name">SQL</span><span class="skill-percentage">80%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-skill="80"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span class="skill-name">Swift UI</span><span class="skill-percentage">75%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-skill="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span class="skill-name">VHDL</span><span class="skill-percentage">70%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-skill="70"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span class="skill-name">Power BI</span><span class="skill-percentage">85%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-skill="85"></div></div>
+                        </div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MS Office</span>
+                        <span class="skill-tag">OpenShift</span>
+                        <span class="skill-tag" data-i18n="skills.tag.dataviz">Datenvisualisierung</span>
+                        <span class="skill-tag" data-i18n="skills.tag.embedded">Embedded Systems</span>
+                    </div>
+                </div>
+                <div class="skills-category fade-in">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-users"></i>
+                        <span data-i18n="skills.soft.title">Kernfähigkeiten</span>
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-i18n="skills.soft.teamwork">Teamarbeit</span>
+                        <span class="skill-tag" data-i18n="skills.soft.learning">Selbstständiges Lernen</span>
+                        <span class="skill-tag" data-i18n="skills.soft.problemsolving">Problemlösung</span>
+                        <span class="skill-tag" data-i18n="skills.soft.analytical">Analytisches Denken</span>
+                    </div>
+                </div>
+                <div class="skills-category fade-in">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-language"></i>
+                        <span data-i18n="skills.languages.title">Sprachen</span>
+                    </h3>
+                    <div class="languages-grid">
+                        <div class="language-item">
+                            <span class="language-name" data-i18n="skills.languages.german">Deutsch</span>
+                            <span class="language-level" data-i18n="skills.languages.native">Muttersprache</span>
+                        </div>
+                        <div class="language-item">
+                            <span class="language-name" data-i18n="skills.languages.arabic">Arabisch</span>
+                            <span class="language-level" data-i18n="skills.languages.native">Muttersprache</span>
+                        </div>
+                        <div class="language-item">
+                            <span class="language-name" data-i18n="skills.languages.english">Englisch</span>
+                            <span class="language-level" data-i18n="skills.languages.b1">B1 – Gute Kenntnisse</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills-category fade-in">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-heart"></i>
+                        <span data-i18n="skills.interests.title">Interessen</span>
+                    </h3>
+                    <div class="interests-grid">
+                        <div class="interest-item"><i class="fas fa-futbol"></i><span data-i18n="skills.interests.football">Fußball</span></div>
+                        <div class="interest-item"><i class="fas fa-dumbbell"></i><span data-i18n="skills.interests.fitness">Fitness</span></div>
+                        <div class="interest-item"><i class="fas fa-microchip"></i><span data-i18n="skills.interests.diy">DIY-Elektronik</span></div>
+                        <div class="interest-item"><i class="fas fa-leaf"></i><span data-i18n="skills.interests.sustainability">Nachhaltige Technik</span></div>
+                    </div>
+                </div>
+                <div class="skills-category fade-in">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-id-card"></i>
+                        <span data-i18n="skills.qualifications.title">Weitere Qualifikationen</span>
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag"><i class="fas fa-car"></i> <span data-i18n="skills.qualifications.license">Führerschein Klasse B</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title" data-i18n="contact.title">Kontakt</h2>
+                <p class="section-subtitle" data-i18n="contact.subtitle">Lassen Sie uns zusammenarbeiten</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h3 data-i18n="contact.hello">Sagen Sie Hallo!</h3>
+                    <p data-i18n="contact.text">Ich freue mich über neue Herausforderungen und spannende Projekte. Zögern Sie nicht, mich zu kontaktieren!</p>
+                    <div class="contact-links">
+                        <a href="mailto:mohammed.gedidou@gmail.com" class="contact-link">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-link-text">
+                                <span class="contact-link-label" data-i18n="contact.email">E-Mail</span>
+                                <span class="contact-link-value">mohammed.gedidou@gmail.com</span>
+                            </div>
+                        </a>
+                        <a href="tel:+491774917248" class="contact-link">
+                            <i class="fas fa-phone"></i>
+                            <div class="contact-link-text">
+                                <span class="contact-link-label" data-i18n="contact.phone">Telefon</span>
+                                <span class="contact-link-value">+49 177 491 724 8</span>
+                            </div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/mohammed-gedidou-020929233" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <i class="fab fa-linkedin"></i>
+                            <div class="contact-link-text">
+                                <span class="contact-link-label">LinkedIn</span>
+                                <span class="contact-link-value">Mohamemd Gedidou</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FIX 2: Formspree Kontaktformular -->
+                <div class="contact-form fade-in">
+                    <div id="formSuccess" style="display:none; background:linear-gradient(135deg,#1a365d,#2c5282); color:#fff; border-radius:12px; padding:2rem; text-align:center; margin-bottom:1.5rem;">
+                        <i class="fas fa-check-circle" style="font-size:2.5rem; color:var(--color-accent); margin-bottom:1rem; display:block;"></i>
+                        <p style="font-weight:600; font-size:1.1rem;" id="successTitle">Nachricht gesendet!</p>
+                        <p style="opacity:0.85; margin-top:0.5rem; font-size:0.95rem;" id="successText">Ich melde mich so schnell wie möglich bei Ihnen.</p>
+                    </div>
+                    <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <input type="hidden" name="_subject" value="Neue Nachricht von Portfolio-Website">
+                        <div class="form-group">
+                            <label for="name" data-i18n="form.name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Ihr Name" data-i18n-placeholder="form.namePlaceholder" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-i18n="form.email">E-Mail</label>
+                            <input type="email" id="email" name="email" placeholder="ihre.email@beispiel.de" data-i18n-placeholder="form.emailPlaceholder" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-i18n="form.message">Nachricht</label>
+                            <textarea id="message" name="message" placeholder="Ihre Nachricht..." data-i18n-placeholder="form.messagePlaceholder" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-i18n="form.submit">Nachricht senden</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">&copy; 2025 Mohammed Gedidou. <span data-i18n="footer.rights">Alle Rechte vorbehalten.</span></p>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/mohammed-gedidou-020929233" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:mohammed.gedidou@gmail.com" aria-label="E-Mail"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+491774917248" aria-label="Telefon"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            de: {
+                nav: { about:"Über mich", experience:"Erfahrung", education:"Ausbildung", skills:"Skills", contact:"Kontakt" },
+                hero: { title:"Werkstudent Software Engineering | B.Eng. TI | Masterstudent CE", quote:"„Man muss das Unmögliche versuchen, um das Mögliche zu erreichen.\"", quoteAuthor:"— Hermann Hesse", contactBtn:"Kontakt aufnehmen", downloadBtn:"CV herunterladen" },
+                about: { title:"Über mich", subtitle:"Lernen Sie mich kennen", p1:"Ich bin ein leidenschaftlicher Software Engineer mit Fokus auf Embedded Systems und Datenanalyse. Mit meinem Bachelor in Technischer Informatik und meinem laufenden Masterstudium in Computer Engineering bringe ich sowohl theoretisches Wissen als auch praktische Erfahrung mit.", p2:"Bei 50Hertz Transmission GmbH konnte ich wertvolle Erfahrungen in der Softwareentwicklung, Datenvisualisierung und Systemadministration sammeln. Ich liebe es, komplexe technische Herausforderungen zu meistern und innovative Lösungen zu entwickeln.", p3:"In meiner Freizeit beschäftige ich mich mit DIY-Elektronik, spiele Fußball und setze mich für Nachhaltigkeit in der Technikentwicklung ein.", highlight1:"Jahre Erfahrung", highlight2:"Bachelor Note", highlight3:"Sprachen" },
+                experience: { title:"Berufserfahrung", subtitle:"Mein Werdegang", present:"heute", job1:{ title:"Werkstudent Software Engineering", task1:"Entwicklung interner Softwarepakete", task2:"Unterstützung von Entwicklerteams bei Deployment, Updates und OpenShift-Administration", task3:"Erstellung von internen Anwendungen" }, job2:{ title:"Werkstudent Data Analysis (zuvor Praktikant)", task1:"Entwicklung von Dashboards zur Visualisierung von Daten", task2:"Analyse und Aufbereitung energiewirtschaftlicher Systemdaten", task3:"Mitarbeit an der Optimierung relationaler Datenbankmodelle" }, job3:{ title:"Verkäufer", task1:"Kundenberatung, Kassentätigkeit und Warenlogistik", task2:"Verantwortung für Ordnung und Organisation im Verkaufsraum" } },
+                education: { title:"Ausbildung", subtitle:"Meine akademische Laufbahn", present:"heute", master:{ degree:"Masterstudium Computer Engineering" }, bachelor:{ degree:"B.Eng. Technische Informatik – Embedded-Systems", thesis:"Bachelorarbeit: „Visuell gesteuerte Roboter\" – Note 1,8" }, focus:{ title:"Technische Schwerpunkte", 1:"Advanced Python (Versionen 3.6–3.11)", 2:"Software Engineering mit C++", 3:"iOS-Programmierung mit Swift UI", 4:"Embedded Systems & Systemarchitektur" } },
+                skills: { title:"Skills", subtitle:"Meine Fähigkeiten & Expertise", technical:{ title:"Programmiersprachen & Tools" }, tag:{ dataviz:"Datenvisualisierung", embedded:"Embedded Systems" }, soft:{ title:"Kernfähigkeiten", teamwork:"Teamarbeit", learning:"Selbstständiges Lernen", problemsolving:"Problemlösung", analytical:"Analytisches Denken" }, languages:{ title:"Sprachen", german:"Deutsch", arabic:"Arabisch", english:"Englisch", native:"Muttersprache", b1:"B1 – Gute Kenntnisse" }, interests:{ title:"Interessen", football:"Fußball", fitness:"Fitness", diy:"DIY-Elektronik", sustainability:"Nachhaltige Technik" }, qualifications:{ title:"Weitere Qualifikationen", license:"Führerschein Klasse B" } },
+                contact: { title:"Kontakt", subtitle:"Lassen Sie uns zusammenarbeiten", hello:"Sagen Sie Hallo!", text:"Ich freue mich über neue Herausforderungen und spannende Projekte. Zögern Sie nicht, mich zu kontaktieren!", email:"E-Mail", phone:"Telefon" },
+                form: { name:"Name", namePlaceholder:"Ihr Name", email:"E-Mail", emailPlaceholder:"ihre.email@beispiel.de", message:"Nachricht", messagePlaceholder:"Ihre Nachricht...", submit:"Nachricht senden", sending:"Wird gesendet...", successTitle:"Nachricht gesendet!", successText:"Ich melde mich so schnell wie möglich bei Ihnen.", error:"Fehler beim Senden. Bitte direkt per E-Mail kontaktieren." },
+                footer: { rights:"Alle Rechte vorbehalten." }
+            },
+            en: {
+                nav: { about:"About Me", experience:"Experience", education:"Education", skills:"Skills", contact:"Contact" },
+                hero: { title:"Working Student Software Engineering | B.Eng. CE | Master's Student CE", quote:"\"One must attempt the impossible in order to achieve the possible.\"", quoteAuthor:"— Hermann Hesse", contactBtn:"Get in Touch", downloadBtn:"Download CV" },
+                about: { title:"About Me", subtitle:"Get to Know Me", p1:"I am a passionate Software Engineer with a focus on Embedded Systems and Data Analysis. With my Bachelor's degree in Computer Engineering and my ongoing Master's studies, I bring both theoretical knowledge and practical experience.", p2:"At 50Hertz Transmission GmbH, I gained valuable experience in software development, data visualization, and system administration. I love mastering complex technical challenges and developing innovative solutions.", p3:"In my free time, I work on DIY electronics, play football, and advocate for sustainability in technology development.", highlight1:"Years Experience", highlight2:"Bachelor Grade", highlight3:"Languages" },
+                experience: { title:"Work Experience", subtitle:"My Career Path", present:"present", job1:{ title:"Working Student Software Engineering", task1:"Development of internal software packages", task2:"Supporting development teams with deployment, updates, and OpenShift administration", task3:"Creating internal applications" }, job2:{ title:"Working Student Data Analysis (previously Intern)", task1:"Development of dashboards for data visualization", task2:"Analysis and processing of energy industry system data", task3:"Contributing to the optimization of relational database models" }, job3:{ title:"Sales Assistant", task1:"Customer consultation, cashier duties, and merchandise logistics", task2:"Responsible for order and organization in the sales area" } },
+                education: { title:"Education", subtitle:"My Academic Journey", present:"present", master:{ degree:"Master's Degree in Computer Engineering" }, bachelor:{ degree:"B.Eng. Computer Engineering – Embedded Systems", thesis:"Bachelor's Thesis: \"Visually Controlled Robots\" – Grade 1.8" }, focus:{ title:"Technical Focus Areas", 1:"Advanced Python (Versions 3.6–3.11)", 2:"Software Engineering with C++", 3:"iOS Programming with Swift UI", 4:"Embedded Systems & System Architecture" } },
+                skills: { title:"Skills", subtitle:"My Abilities & Expertise", technical:{ title:"Programming Languages & Tools" }, tag:{ dataviz:"Data Visualization", embedded:"Embedded Systems" }, soft:{ title:"Core Competencies", teamwork:"Teamwork", learning:"Self-directed Learning", problemsolving:"Problem Solving", analytical:"Analytical Thinking" }, languages:{ title:"Languages", german:"German", arabic:"Arabic", english:"English", native:"Native", b1:"B1 – Good Knowledge" }, interests:{ title:"Interests", football:"Football", fitness:"Fitness", diy:"DIY Electronics", sustainability:"Sustainable Tech" }, qualifications:{ title:"Additional Qualifications", license:"Driver's License Class B" } },
+                contact: { title:"Contact", subtitle:"Let's Work Together", hello:"Say Hello!", text:"I look forward to new challenges and exciting projects. Don't hesitate to contact me!", email:"Email", phone:"Phone" },
+                form: { name:"Name", namePlaceholder:"Your Name", email:"Email", emailPlaceholder:"your.email@example.com", message:"Message", messagePlaceholder:"Your message...", submit:"Send Message", sending:"Sending...", successTitle:"Message Sent!", successText:"I will get back to you as soon as possible.", error:"Error sending. Please contact directly via email." },
+                footer: { rights:"All rights reserved." }
+            }
+        };
+
+        let currentLang = localStorage.getItem('language') || 'de';
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            document.getElementById('langToggle').textContent = lang === 'de' ? 'EN' : 'DE';
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const t = getNestedTranslation(translations[lang], key);
+                if (t) el.textContent = t;
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                const t = getNestedTranslation(translations[lang], key);
+                if (t) el.placeholder = t;
+            });
+        }
+
+        function getNestedTranslation(obj, key) {
+            return key.split('.').reduce((o, i) => o?.[i], obj);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => updateLanguage(currentLang));
+        document.getElementById('langToggle').addEventListener('click', () => {
+            updateLanguage(currentLang === 'de' ? 'en' : 'de');
+        });
+
+        // Dark/Light Mode
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) { html.setAttribute('data-theme', savedTheme); updateThemeIcon(savedTheme); }
+        themeToggle.addEventListener('click', () => {
+            const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        function updateThemeIcon(theme) {
+            themeIcon.classList.toggle('fa-moon', theme !== 'dark');
+            themeIcon.classList.toggle('fa-sun', theme === 'dark');
+        }
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars', !navLinks.classList.contains('active'));
+            icon.classList.toggle('fa-times', navLinks.classList.contains('active'));
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+            });
+        });
+
+        // Navbar scroll
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+            });
+        });
+
+        // FIX 3: Fade-in observer
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+        // Skill bars
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.getAttribute('data-skill') + '%';
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.skill-progress').forEach(bar => skillObserver.observe(bar));
+
+        // FIX 2: Formspree async submit
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formSuccess = document.getElementById('formSuccess');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const t = translations[currentLang];
+            if (!document.getElementById('name').value || !document.getElementById('email').value || !document.getElementById('message').value) {
+                alert(currentLang === 'de' ? 'Bitte füllen Sie alle Felder aus.' : 'Please fill in all fields.');
+                return;
+            }
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>${t.form.sending}</span>`;
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST', body: new FormData(contactForm), headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    document.getElementById('successTitle').textContent = t.form.successTitle;
+                    document.getElementById('successText').textContent = t.form.successText;
+                    contactForm.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                } else { throw new Error(); }
+            } catch {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> <span>${t.form.submit}</span>`;
+                alert(t.form.error);
+            }
+        });
+
+        // Active nav highlighting
+        const sections = document.querySelectorAll('section, header');
+        const navItems = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => { if (scrollY >= s.offsetTop - 200) current = s.getAttribute('id'); });
+            navItems.forEach(item => {
+                item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+            });
+        });
+    </script>
+</body>
+</html>
